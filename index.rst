@@ -32,46 +32,16 @@
 Getting Started
 ---------------
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed velit odio, ultrices sed elementum vitae, dictum eget turpis. Etiam ultrices orci quis tempus tempus. Nulla non nibh imperdiet, suscipit risus quis, eleifend nisl. Morbi at posuere nibh, quis bibendum dui. Morbi dictum sem a ipsum bibendum condimentum. Suspendisse id ante gravida, efficitur leo a, consequat enim. Suspendisse tempor lorem vel purus scelerisque, vel facilisis lorem consequat. Pellentesque augue orci, iaculis vel mollis sit amet, scelerisque a tellus. Aliquam commodo in lectus feugiat porta.  Albert Chen
+This Guide is for quick apply Oracle best practice step by step base on Michael Webster’s best practice. 
+In filed , I found most of people read the best practice guide but still can’t apply those parameter or settings.
+So I wrote this guide for who do not have any Oracle technical background .
+It’s a quick way to apply those best practice. I still suggest you must read our Nutanix best guide to understand why we tune this.
+You can use this on your POC or when customer want put Oracle on Nutanix.
+In this guide , we do not mentioned about how to install a Oracle database.
+If you want learn how to installed a Oracle database , you can find ”how to” in these links.
 
-What's New
-++++++++++
+- Oracle Official Website :
+https://docs.oracle.com/database/121/LADBI/toc.htm
 
-- Workshop updated for the following software versions:
-  - AOS 5.6
-  - AFS 3.0
-- Added :ref:`example_lab_3`
-
-Access Instructions
-+++++++++++++++++++
-
-The Nutanix Hosted POC environment can be accessed a number of different ways:
-
-Citrix XenDesktop
-.................
-
-https://citrixready.nutanix.com - *Accessible via the Citrix Receiver client or HTML5*
-
-**Nutanix Employees** - Use your NUTANIXDC credentials
-
-**Non-Employees** - **Username:** POCxxx-User01 (up to POCxxx-User20), **Password:** *<Provided by Instructor>*
-
-Employee Pulse Secure VPN
-..........................
-
-https://sslvpn.nutanix.com - Use your CORP credentials
-
-Non-Employee Pulse Secure VPN
-..............................
-
-https://lab-vpn.nutanix.com - **Username:** POCxxx-User01 (up to POCxxx-User20), **Password:** *<Provided by Instructor>*
-
-Under **Client Application Sessions**, click **Start** to the right of **Pulse Secure** to download the client.
-
-Install and open **Pulse Secure**.
-
-Add a connection:
-
-- **Type** - Policy Secure (UAC) or Connection Server
-- **Name** - HPOC VPN
-- **Server URL** - lab-vpn.nutanix.com
+- Un Official Website :
+http://www.snapdba.com/2014/01/oracle-database-11gr2-11-2-0-4-installation-on-oracle-linux-6-4/
