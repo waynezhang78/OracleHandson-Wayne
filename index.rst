@@ -24,12 +24,12 @@
 Getting Started
 ---------------
 
-This Guide is for quick apply Oracle best practice step by step base on Michael Webster’s best practice.
-In filed , I found most of people read the best practice guide but still can’t apply those parameter or settings.
-So I wrote this guide for who do not have any Oracle technical background .
-It’s a quick way to apply those best practice. I still suggest you must read our Nutanix best guide to understand why we tune this.
-You can use this on your POC or when customer want put Oracle on Nutanix.
-In this guide , we do not mentioned about how to install a Oracle database.
+This workshop is for quick apply Oracle best practice step by step base on Nutanix Oralce on AHV best practice for SE or partner training.
+I found most of technical persons read the best practice guide but still can’t apply these parameter or settings.
+That why I wrote this workshop material for who doesn't have any Oracle technical background but still want apply Oracle best practice on Nutanix for POC or testing purpose.
+It’s a quick way to apply those best practice. I still suggest you must read our Nutanix best guide to understand why we need to change some parameters and configuration to get best performance.
+After you learned, You can apply this to your POC or when customer want running Oracle on Nutanix.
+In this guide , we didn't mention about how to install a Oracle database.
 If you want learn how to installed a Oracle database , you can find ”how to” in these links.
 
 - Oracle Official Website :
