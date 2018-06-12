@@ -196,7 +196,7 @@ After we modified disk maximum IO size and add network queue , please reboot the
 
 ``# shutdown –r 0``
 
-**2.5.2 Change time server option **
+**2.5.2 Change time server option**
 
 We need to change the time server option to –x , go to /etc/sysconfig folder . vi ntpd file . In the OPTIONS line add –x ,as follow screenshot show.
 
@@ -206,11 +206,10 @@ We need to change the time server option to –x , go to /etc/sysconfig folder .
 
 Append these to kernel boot arguments (for example, on Red Hat Enterprise Linux edit /etc/grub.conf or on Ubuntu edit /boot/grub/grub.cfg).
 
-.. code-block:: bash
-  :name: grub.conf example
-  :caption: grub.conf example
-  vmw_pvscsi.cmd_per_lun=254
-  vmw_pvscsi.ring_pages=32
+
+``vmw_pvscsi.cmd_per_lun=254``
+
+``vmw_pvscsi.ring_pages=32``
 
 
   After sytem comes up , please using this command to check the change value is effective!
@@ -226,10 +225,11 @@ We also need to add follow into /etc/grub.conf
 
 After modified, we need reboot the virtual machine.
 
-# shutdown –r 0
+``# shutdown –r 0``
 
-# cat /sys/module/vmw_pvscsi/parameters/cmd_per_lun
-# cat /sys/module/vmw_pvscsi/parameters/ring_pages
+``# cat /sys/module/vmw_pvscsi/parameters/cmd_per_lun``
+
+``# cat /sys/module/vmw_pvscsi/parameters/ring_pages``
 
 For Oracle if running on Windows –
 
@@ -242,18 +242,23 @@ For Oracle if running on Windows –
 Go to /etc folder , using vi open sysctl.conf . Add follow lines into the sysctl.conf. Those are kernel parameters that current OS using . Becareful first one parameter “vm.nr_hugepages” , that need to match your SGA size. If you tune this large than your OS memory size, this will cause panic in your system. How to calculate this ? vm.nr_hugepages=49416 it means , we have 49416 page. Every hugepage size is 2MB, so total we have 96 GB memory to use.
 Also note vm.hugetlb_shm_group=54321 , where 54321 is Oracle admin group “oinstall” (we usually call this name) group id. Please check your oinstall GID. Otherwise you enable a huge page but can’t use
 
-.. code-block:: bash
-  :name: systcl.conf example
-  :caption: sysctl.conf example
-  vm.nr_hugepages=49416
-  vm.hugetlb_shm_group=54321
-  vm.overcommit_memory = 1
-  vm.dirty_background_ratio = 5
-  vm.dirty_ratio = 15
-  vm.dirty_expire_centisecs = 500
-  vm.dirty_writeback_centisecs = 100
-  vm.swappiness = 0
-  net.ipv4.tcp_mtu_probing=1
+``vm.nr_hugepages=49416``
+
+``vm.hugetlb_shm_group=54321``
+
+``vm.overcommit_memory = 1``
+
+``vm.dirty_background_ratio = 5``
+
+``vm.dirty_ratio = 15``
+
+``vm.dirty_expire_centisecs = 500``
+
+``vm.dirty_writeback_centisecs = 100``
+
+``vm.swappiness = 0``
+
+``net.ipv4.tcp_mtu_probing=1``
 
 
 .. figure:: images/Lab216.png
@@ -261,26 +266,38 @@ Also note vm.hugetlb_shm_group=54321 , where 54321 is Oracle admin group “oins
 For Oracle RAC , we need to add those parameter into /etc/sysctl.conf
 Most of those parameter are for RAC inter-connection. And we also recommend using 10Gb/s network between those RAC nodes
 
-.. code-block:: bash
-  :name: systcl.conf example
-  :caption: sysctl.conf example
-  net.ipv4.conf.eth2.rp_filter = 2
-  net.ipv4.conf.eth1.rp_filter = 2
-  net.core.rmem_max = 536870912
-  net.core.wmem_max = 536870912
-  net.ipv4.tcp_rmem = 4096 87380 536870912
-  net.ipv4.tcp_wmem = 4096 65536 536870912
-  net.core.netdev_max_backlog = 250000
-  net.ipv4.tcp_congestion_control=htcp
-  net.core.somaxconn = 65535
-  net.ipv4.tcp_keepalive_intvl = 15
-  net.ipv4.tcp_fin_timeout = 15
-  net.ipv4.tcp_keepalive_probes = 5
-  net.ipv4.tcp_tw_reuse = 1
-  net.ipv4.tcp_max_syn_backlog = 65535
+
+``net.ipv4.conf.eth2.rp_filter = 2``
+
+``net.ipv4.conf.eth1.rp_filter = 2``
+
+``net.core.rmem_max = 536870912``
+
+``net.core.wmem_max = 536870912``
+
+``net.ipv4.tcp_rmem = 4096 87380 536870912``
+
+``net.ipv4.tcp_wmem = 4096 65536 536870912``
+
+``net.core.netdev_max_backlog = 250000``
+
+``net.ipv4.tcp_congestion_control=htcp``
+
+``net.core.somaxconn = 65535``
+
+``net.ipv4.tcp_keepalive_intvl = 15``
+
+``net.ipv4.tcp_fin_timeout = 15``
+
+``net.ipv4.tcp_keepalive_probes = 5``
+
+``net.ipv4.tcp_tw_reuse = 1``
+
+``net.ipv4.tcp_max_syn_backlog = 65535``
 
   After you modified those parameter, please use sysctl -p command to reload the configuration or you can just reboot the virtual machine.
-  # sysctl –p
+
+  ``# sysctl –p``
 
 
 **2.5.5 Modify limits.conf**
@@ -291,25 +308,32 @@ Here are some limitations for oracle and grid user. When Oracle partner install 
   But one parameter “@oinstall – memlock 104857600” that’s for hughpage use .
   We need add by our own (most of Oracle partners didn’t enable this for customers)
 
-.. code-block:: bash
-  :name: limits.conf example
-  :caption: limits.conf example
-  
-   grid soft nproc 131072
-   grid hard nproc 131072
-   grid soft nofile 131072
-   grid hard nofile 131072
-   oracle soft nofile 131072
-   oracle hard nofile 131072
-   oracle soft nproc 131072
-   oracle hard nproc 131072
-   oracle soft core unlimited
-   oracle hard core unlimited
-   oracle soft stack 10240
-   oracle hard stack 32768
+``grid soft nproc 131072``
+
+``grid hard nproc 131072``
+
+``grid soft nofile 131072``
+
+``grid hard nofile 131072``
+
+``oracle soft nofile 131072``
+
+``oracle hard nofile 131072``
+
+``oracle soft nproc 131072``
+
+``oracle hard nproc 131072``
+
+``oracle soft core unlimited``
+
+``oracle hard core unlimited``
+
+``oracle soft stack 10240``
+
+``oracle hard stack 32768``
 
 
-**2.5.6 Setup jumbo frame between Oracle RAC inter-connection **
+**2.5.6 Setup jumbo frame between Oracle RAC inter-connection**
 
 When we setup jumbo frame, we need setup it end to end. You must setup it on your physical switch , virtual switch , and your guest OS .Here, we do not teach how to setup physical switch. You need to ask your customer’s network administrator to setup and check for you.
 If they do not setup this correctly, it will not be worked.
@@ -332,7 +356,7 @@ Enable jumbo frame in the Guest OS
 In the VMware environment , we usually recommend using VMXNET3 vNIC for the Guest OS. When you using VMXNET3 vNIC , you must install **VMware Tools** that will include the network drivers. VMXNET3 support 10Gb/s and also better performance than E1000E.
 For Lunix platform –
 
-Please go to /etc/sysconfig/network-scripts, open the file called **ifcfg-eth0** where **0** is your network card number. Add one line **MTU=9000**.
+Please go to **/etc/sysconfig/network-scripts**, open the file called **ifcfg-eth0** where **0** is your network card number. Add one line **MTU=9000**.
 
 .. figure:: images/Lab220.png
 
