@@ -71,6 +71,7 @@ In the Add Disk just need to type the size of the vDisk. Then click “Add”.
 2.4: Choose LVM or ASM
 ++++++++++++++++++++++
 **2.4.1 Using ASM -  (In this lab , we recommend use this )**
+
 We recommend using ASM as Oracle database datafiles management . If you want use ASM in the Oracle database .
 You must install grid first as previous talked. No matter you want using single instance or Oracle RAC.
 First – we need to install some required package from Oracle website . Go this website and installed follow package –
