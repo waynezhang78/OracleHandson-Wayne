@@ -36,7 +36,9 @@ Then select the **Create a new virtual disk**, then click **Next**
 .. figure:: images/Lab202.png
 
 Choose Thick Provision Eager Zeroed Disk Type – It’s for performance reason. If using Oracle RAC , that is the forced option.
- **(When using Oracle RAC, please enable multiwriter option in the VM advance parameter)** . Please refer here :
+**(When using Oracle RAC, please enable multiwriter option in the VM advance parameter)** .
+
+Please refer here :
 https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1034165
 
 
@@ -46,7 +48,7 @@ In the advance options , We want create more PVSCSI . Just need to change the SC
 ESXi will automatically create a virtual SCSI for you. As our best practice guide,
 we need to separate those PVSCSI for different function (redo, archive, datafile).
 
-``Acropolis AHV do not need this function. There are not any PVSCSI for AHV . Acropolis AHV using Virtio.``
+**AHV do not need this function. There are not any PVSCSI for AHV . Acropolis AHV using Virtio.**
 
 .. figure:: images/Lab204.png
 
@@ -55,19 +57,26 @@ One ESXi VM supports maximum **four** PVSCSI cards, like below screenshot. Then 
 
 .. figure:: images/Lab205.png
 
-Also setup VMware disk mode to **Independent&persistent**
+In the VMware disk **Mode** check the **Independent** as well as  **persistent (Changes are immediately and permanently written to the disk.)**
 
 .. figure:: images/Lab206.png
 
-Please create two vdisks /vmdk for redo , four vdisks/vmdks for datafile , every vdisk size more than 100 GB.
+Please create two 50GB vdisks (vmdk) for redo, four 100GB vdisks (vmdks) for datafiles.
  
 **AHV Steps:**
 
-In the VM tab, Choose the “Updates” , in the Update VM “Disks” section , click the “Add New Disk”
+In the VM tab, Choose the **Updates** , in the Update VM **Disks** section , click the **Add New Disk**
 
 
 .. figure:: images/Lab207.png
+
+
+
+Choose the SCSI instead of IDE one
+
 .. figure:: images/Lab208.png
+
+
 
 In the Add Disk just need to type the size of the vDisk. Then click **Add**
 
@@ -105,6 +114,7 @@ Create a primary partition, sometimes you forget this , and you always get an er
 
 
 Then create Oracle ASM disk using following command , execute in root user
+
 ``/etc/init.d/oracleasm createdisk DISKNAME /dev/sdx1``
 
 .. figure:: images/Lab212.png
@@ -127,9 +137,11 @@ Example using Oracle Linux -  If you using different Linux , please refer to the
 https://www.suse.com/communities/blog/linux-lvm-logical-volume-management/
 
 **UBUNTU**
+
 https://wiki.ubuntu.com/Lvm
 
 **RHEL**
+
 https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Logical_Volume_Manager_Administration/
 
 Most of Linux LVM commands are same,
@@ -167,6 +179,7 @@ Setup Linux Maximum I/O size to 1024k match to ASM AU size (ASM only ). We chang
 
 In this example , where sdk , sdl , sdn ..that depend on your current situation. It means disk devices name. You can using **fdisk –l** to list all of your disks.
 Add this in the end of /etc/rc.local
+
 .. code-block:: bash
   :name: rc.local example
   :caption: Modify example
@@ -175,10 +188,11 @@ Add this in the end of /etc/rc.local
      echo 1024 > /sys/block/${LUN}/queue/max_sectors_kb
   done
 
-  And we also need to add network queue , still open the /etc/rc.local file .
-  add this line for network increase queue
-  /sbin/ethtool -G ethX rx 4096 tx 4096
-  After we modified disk maximum IO size and add network queue , please reboot the virtual machine.
+And we also need to add network queue , still open the /etc/rc.local file .add this line for network increase queue
+
+``/sbin/ethtool -G ethX rx 4096 tx 4096``
+
+After we modified disk maximum IO size and add network queue , please reboot the virtual machine.
 
 ``# shutdown –r 0``
 
@@ -271,11 +285,16 @@ Most of those parameter are for RAC inter-connection. And we also recommend usin
 
 **2.5.5 Modify limits.conf**
 
-Please using vi to open the /etc/security/limits.conf file. Here are some limitations for oracle and grid user. When Oracle partner install Oracle databases . They always modified those parameters. We just need to check the content . But one parameter “@oinstall – memlock 104857600” that’s for hughpage use . We need add by our own (most of Oracle partners didn’t enable this for customers)
+Please using vi to open the /etc/security/limits.conf file.
+Here are some limitations for oracle and grid user. When Oracle partner install Oracle databases .
+ They always modified those parameters. We just need to check the content .
+  But one parameter “@oinstall – memlock 104857600” that’s for hughpage use .
+  We need add by our own (most of Oracle partners didn’t enable this for customers)
 
 .. code-block:: bash
   :name: limits.conf example
   :caption: limits.conf example
+  
    grid soft nproc 131072
    grid hard nproc 131072
    grid soft nofile 131072
