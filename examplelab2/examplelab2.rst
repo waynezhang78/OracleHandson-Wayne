@@ -165,7 +165,7 @@ Setup Linux Maximum I/O size to 1024k match to ASM AU size (ASM only ). We chang
 .. note:: when you doing system kernel or some system parameter modification , please backup first . And also using “root” user to modify them .
 
 
-In this example , where sdk , sdl , sdn ..that depend on your current situation. It means disk devices name. You can using fdisk –l to list all of your disks.
+In this example , where sdk , sdl , sdn ..that depend on your current situation. It means disk devices name. You can using **fdisk –l** to list all of your disks.
 Add this in the end of /etc/rc.local
 .. code-block:: bash
   :name: rc.local example
@@ -223,7 +223,7 @@ For Oracle if running on Windows –
 
 ``REG ADD HKLM\SYSTEM\CurrentControlSet\services\pvscsi\Parameters\Device /v DriverParameter /t REG_SZ /d "RequestRingPages=32,MaxQueueDepth=254"``
  
-** 2.5.4 Modify systcl.conf some kernel parameters**
+**2.5.4 Modify systcl.conf some kernel parameters**
 
 Go to /etc folder , using vi open sysctl.conf . Add follow lines into the sysctl.conf. Those are kernel parameters that current OS using . Becareful first one parameter “vm.nr_hugepages” , that need to match your SGA size. If you tune this large than your OS memory size, this will cause panic in your system. How to calculate this ? vm.nr_hugepages=49416 it means , we have 49416 page. Every hugepage size is 2MB, so total we have 96 GB memory to use.
 Also note vm.hugetlb_shm_group=54321 , where 54321 is Oracle admin group “oinstall” (we usually call this name) group id. Please check your oinstall GID. Otherwise you enable a huge page but can’t use
@@ -269,7 +269,7 @@ Most of those parameter are for RAC inter-connection. And we also recommend usin
   # sysctl –p
 
 
-** 2.5.5 Modify limits.conf**
+**2.5.5 Modify limits.conf**
 
 Please using vi to open the /etc/security/limits.conf file. Here are some limitations for oracle and grid user. When Oracle partner install Oracle databases . They always modified those parameters. We just need to check the content . But one parameter “@oinstall – memlock 104857600” that’s for hughpage use . We need add by our own (most of Oracle partners didn’t enable this for customers)
 
@@ -290,9 +290,14 @@ Please using vi to open the /etc/security/limits.conf file. Here are some limita
    oracle hard stack 32768
 
 
-** 2.5.6 Setup jumbo frame between Oracle RAC inter-connection **
-When we setup jumbo frame, we need setup it end to end. You must setup it on your physical switch , virtual switch , and your guest OS .Here, we do not teach how to setup physical switch. You need to ask your customer’s network administrator to setup and check for you. If they do not setup this correctly, it will not be worked.
-In the following screen capture , that taught you how to setup jumbo frame in the ESXi environment. Go vSphere Client connect to vCenter , click your ESXi Server first. Select Configuration tab. And then select “Properties…”
+**2.5.6 Setup jumbo frame between Oracle RAC inter-connection **
+
+When we setup jumbo frame, we need setup it end to end. You must setup it on your physical switch , virtual switch , and your guest OS .Here, we do not teach how to setup physical switch. You need to ask your customer’s network administrator to setup and check for you.
+If they do not setup this correctly, it will not be worked.
+In the following screen capture ,
+ that taught you how to setup jumbo frame in the ESXi environment.
+ Go vSphere Client connect to vCenter , click your ESXi Server first.
+ Select Configuration tab. And then select **Properties…**
 
 .. figure:: images/Lab217.png
 
@@ -300,20 +305,25 @@ Select vSwitch , and then select “Edit”
 
 .. figure:: images/Lab218.png
 
-In the vSwith0 Properties , go “General” tab . You will see a Advanced Properties , input 9000 (default value is 1500) . Then select OK!
+In the vSwith0 Properties , go **General** tab . You will see a **Advanced Properties** , input 9000 (default value is 1500) . Then select **OK**!
 
 .. figure:: images/Lab219.png
 
 Enable jumbo frame in the Guest OS
-In the VMware environment , we usually recommend using VMXNET3 vNIC for the Guest OS. When you using VMXNET3 vNIC , you must install “VMware Tools” that will include the network drivers. VMXNET3 support 10Gb/s and also better performance than E1000E.
-For Lunix platform – Please go to /etc/sysconfig/network-scripts, open the file called “ifcfg-eth0” where 0 is your network card number. Add one line MTU=9000.
+In the VMware environment , we usually recommend using VMXNET3 vNIC for the Guest OS. When you using VMXNET3 vNIC , you must install **VMware Tools** that will include the network drivers. VMXNET3 support 10Gb/s and also better performance than E1000E.
+For Lunix platform –
+
+Please go to /etc/sysconfig/network-scripts, open the file called **ifcfg-eth0** where **0** is your network card number. Add one line **MTU=9000**.
 
 .. figure:: images/Lab220.png
 
 Then restart the network services.
-# service network restart
+
+``# service network restart``
+
 After restart network service , using following commend to check if setting successful ?
-#ifconfig –a
+
+``#ifconfig –a``
 
 .. figure:: images/Lab221.png
 
@@ -326,8 +336,10 @@ For windows platform - Please go windows network cards properties , choose VMXNE
 
 Here is some Oracle database we need to apply for best practice.
 Those two parameters need be changed.
-DB_File_MultiBlock_Read_Count = 512
-Parallel_Threads_per_CPU=1
+
+-DB_File_MultiBlock_Read_Count = 512
+-Parallel_Threads_per_CPU=1
+
 How we change this ?  Login as Oracle user. Chang ORACLE_SID to what instance you need connect
 export ORACLE_SID=xxxx where the xxxx is Oracle database instance name.
 On the command prompt , type follow command
