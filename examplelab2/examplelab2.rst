@@ -8,7 +8,7 @@ Lab 2: Oracle on Nutanix Best Practice
 2.1: Before installation Oracle database
 ++++++++++++++++++++++++++++++++++++++++
 
- Please ask your user to download the oracle preinstall package – This will help you to check whole oracle environment and installed required package for you . Create Oracle account for you . But you need to change Oracle password by yourself .
+Please ask your user to download the oracle preinstall package – This will help you to check whole oracle environment and installed required package for you . Create Oracle account for you . But you need to change Oracle password by yourself .
 
 When you start install Oracle database , please go Oracle website download “oracle-rdbms-server-11gR2-preinstall” or “oracle-rdbms-server-12cR1-pre-install”. If your virtual machine can connect to internet and also using Oracle Linux as your platform. You can use following command to install directly .
 
