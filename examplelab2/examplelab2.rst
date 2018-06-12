@@ -24,16 +24,19 @@ Grid is for Oracle ASM and Oracle RAC installation . If your customer they using
 
 This just apply to ESXi hypervisor only , we don’t use this design on Acropolis AHV. When using Oracle database on Nutanix . We need create multiple disks (VMDK) for redo , archive log , datafiles , minimum start from two disks for each function and also located in the different PVSCSI card. Here are step to setup VMDK in different PVSCSI cards.
 
-Using vSphere Client (or Web Client) . Select the Oracle Virtual Machine , right click this virtual machine and select “Edit”. When the window prompt , please click “Add”, Click “Next”.
+Using vSphere Client (or Web Client) .
+
+Select the Oracle Virtual Machine , right click this virtual machine and select **Edit**. When the window prompt , please click **Add**, Click **Next**.
 
 .. figure:: images/Lab201.png
 
-Then select the “Create a new virtual disk”, then click “Next”
+Then select the **Create a new virtual disk**, then click **Next**
 
 
 .. figure:: images/Lab202.png
 
-Choose Thick Provision Eager Zeroed Disk Type – It’s for performance reason. If using Oracle RAC , that is the forced option. (When using Oracle RAC, please enable multiwriter option in the VM advance parameter) . Please refer here :
+Choose Thick Provision Eager Zeroed Disk Type – It’s for performance reason. If using Oracle RAC , that is the forced option.
+ **(When using Oracle RAC, please enable multiwriter option in the VM advance parameter)** . Please refer here :
 https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1034165
 
 
@@ -42,29 +45,31 @@ https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displa
 In the advance options , We want create more PVSCSI . Just need to change the SCSI number to 1:0 or 2:0 or 3:0 .
 ESXi will automatically create a virtual SCSI for you. As our best practice guide,
 we need to separate those PVSCSI for different function (redo, archive, datafile).
+
 ``Acropolis AHV do not need this function. There are not any PVSCSI for AHV . Acropolis AHV using Virtio.``
 
 .. figure:: images/Lab204.png
 
-One ESXi virtual machine support maximum 4 PVSCSI cards, like below screenshot. Then those disks attached to different PVSCSI cards.
+One ESXi VM supports maximum **four** PVSCSI cards, like below screenshot. Then those disks attached to different PVSCSI cards.
 
 
 .. figure:: images/Lab205.png
 
-Also setup VMware disk mode to ""Independent&persistent""
+Also setup VMware disk mode to **Independent&persistent**
 
 .. figure:: images/Lab206.png
 
 Please create two vdisks /vmdk for redo , four vdisks/vmdks for datafile , every vdisk size more than 100 GB.
  
-AHV Steps –
+**AHV Steps:**
+
 In the VM tab, Choose the “Updates” , in the Update VM “Disks” section , click the “Add New Disk”
 
 
 .. figure:: images/Lab207.png
 .. figure:: images/Lab208.png
 
-In the Add Disk just need to type the size of the vDisk. Then click “Add”.
+In the Add Disk just need to type the size of the vDisk. Then click **Add**
 
 .. figure:: images/Lab209.png
 
@@ -92,7 +97,8 @@ If your virtual machine can go internet and also you using Oracle Linux. You can
 
 After that , you can create a Oracle ASM disks by following procedure.
 Partition the VMDK first – just like the screen capture. Using fdisk commend to finish.
-Follow screen capture – Issue fdisk command on the disk which you need partition them. Create a primary partition, sometimes you forget this , and you always get an error when create ASM disks.  ( If you have Oracle partner onsite , you can ask them for help, otherwise follow my procedure )
+Follow screen capture – Issue fdisk command on the disk which you need partition them.
+Create a primary partition, sometimes you forget this , and you always get an error when create ASM disks.
 
 
 .. figure:: images/Lab211.png
@@ -132,12 +138,18 @@ Most of Linux LVM commands are same,
 
 - Create PV command example
 ``pvcreate /dev/sdb``
+
 ``pvcreate /dev/sdc``
+
 ``pvcreate /dev/sdd``
+
 ``pvcreate /dev/sde``
+
 - Create VG command example
 ``vgcreate vg_redo /dev/sdb /dev/sdc``
+
 ``vgcreate vg_arch /dev/sdd /dev/sde``
+
 ``vgcreate vg_data /dev/sdf /dev/sdg /dev/sdh /dev/sdi``
 
 - Create LV command example
@@ -148,7 +160,7 @@ Most of Linux LVM commands are same,
 
 **2.5.1 Change /etc/rc.local (for Maximum IO Size & Network Queue)**
 
-Setup Linux Maximum I/O size to 1024k match to ASM AU size (ASM only ). We change the ASM default AU size from 1MB . So we need to do this setting in Linux environment.
+Setup Linux Maximum I/O size to 1024k match to ASM AU size (ASM only ). We change the ASM default AU size from **1MB** . We must change this setting in the Linux environment.
 
 .. note:: when you doing system kernel or some system parameter modification , please backup first . And also using “root” user to modify them .
 
@@ -169,6 +181,7 @@ Add this in the end of /etc/rc.local
   After we modified disk maximum IO size and add network queue , please reboot the virtual machine.
 
 ``# shutdown –r 0``
+
 **2.5.2 Change time server option **
 
 We need to change the time server option to –x , go to /etc/sysconfig folder . vi ntpd file . In the OPTIONS line add –x ,as follow screenshot show.
@@ -190,18 +203,24 @@ Append these to kernel boot arguments (for example, on Red Hat Enterprise Linux 
   We also need to add follow into /etc/grub.conf
 
 We also need to add follow into /etc/grub.conf
-iommu=soft elevator=noop apm=off transparent_hugepage=never numa=off powersaved=off
+
+``iommu=soft elevator=noop apm=off transparent_hugepage=never numa=off powersaved=off``
+
 .. note:: Please add in the first line of kernel boot option. If you add in the wrong place , that may cause system can’t boot. You will need to go single user mode to modify back again. Also backup first then modify.
 
   .. figure:: images/Lab215.png
 
-  After modified, we need reboot the virtual machine.
+After modified, we need reboot the virtual machine.
+
 # shutdown –r 0
 
 # cat /sys/module/vmw_pvscsi/parameters/cmd_per_lun
 # cat /sys/module/vmw_pvscsi/parameters/ring_pages
 
-For Oracle if running on Windows – **Please using cmd to add this line** -
+For Oracle if running on Windows –
+
+**Please using cmd to add this line** -
+
 ``REG ADD HKLM\SYSTEM\CurrentControlSet\services\pvscsi\Parameters\Device /v DriverParameter /t REG_SZ /d "RequestRingPages=32,MaxQueueDepth=254"``
  
 ** 2.5.4 Modify systcl.conf some kernel parameters**
