@@ -305,9 +305,8 @@ Most of those parameter are for RAC inter-connection. And we also recommend usin
 
 Please using vi to open the /etc/security/limits.conf file.
 Here are some limitations for oracle and grid user. When Oracle partner install Oracle databases .
- They always modified those parameters. We just need to check the content .
-  But one parameter “@oinstall – memlock 104857600” that’s for hughpage use .
-  We need add by our own (most of Oracle partners didn’t enable this for customers)
+They always modified those parameters. We just need to check the content .But one parameter “@oinstall – memlock 104857600” that’s for hughpage use .
+We need add by our own (most of Oracle partners didn’t enable this for customers)
 
 ``grid soft nproc 131072``
 
@@ -338,10 +337,9 @@ Here are some limitations for oracle and grid user. When Oracle partner install 
 
 When we setup jumbo frame, we need setup it end to end. You must setup it on your physical switch , virtual switch , and your guest OS .Here, we do not teach how to setup physical switch. You need to ask your customer’s network administrator to setup and check for you.
 If they do not setup this correctly, it will not be worked.
-In the following screen capture ,
- that taught you how to setup jumbo frame in the ESXi environment.
- Go vSphere Client connect to vCenter , click your ESXi Server first.
- Select Configuration tab. And then select **Properties…**
+In the following screen capture ,that taught you how to setup jumbo frame in the ESXi environment.
+Go vSphere Client connect to vCenter , click your ESXi Server first.
+Select Configuration tab. And then select **Properties…**
 
 .. figure:: images/Lab217.png
 
