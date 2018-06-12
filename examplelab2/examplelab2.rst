@@ -132,6 +132,7 @@ For redo, archive log , datafile . you can choose the Redundancy as **External**
 Nutanix recommend using stripe volumes and choose 512KB as stripe size.
 This will reduce the chance of sequential IO being seen as random, which can often happen withsmaller stripe sizes,  still keep using different PVs for redo, archive log , datafiles
 Example using Oracle Linux -  If you using different Linux , please refer to their LVM documentation .
+
 **SUSE Linux**
 
 https://www.suse.com/communities/blog/linux-lvm-logical-volume-management/
