@@ -42,25 +42,37 @@ http://www.snapdba.com/2014/01/oracle-database-11gr2-11-2-0-4-installation-on-or
 Lab Environment
 ---------------
 
-- Hardware:
+-Hardware:
+
   - Nutanix NX ,HX , XC any platform that Nutanix AOS running inside
+
   - Nutanix CE also can be a Lab environment
+
   - You can download Nutanix CE from here. https://www.nutanix.com/products/community-edition/
 
 -Software :
+
  - Oracle Linux. You can download from Oracle Website. https://www.oracle.com/linux/index.html . If you are install Oracle 11gR2, I
  recommend you use Oracle Linux 6. If you are install Oracle 12cR1 above , I will recommend you use Oracle Linux 7
+
  - Oracle database binary. You can download from http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index-092322.html
+
  - Recommend using 11gR2 database version above for this lab
 
 Setup Lab
 +++++++++
 After you foundation your Nutanix blocks (How to Foundation Nutanix Block)
 You can watch the video from https://www.nutanix.com/2014/07/15/nutanix-foundation-demo-video-from-bare-metal-to-production-in-minutes/
+
 The foundation software is available on
+
 https://portal.nutanix.com/#/page/foundation/list
-After finish foundation, you can create a VM that content Oracle Linux OS. Install Oracle database follow this link - https://www.youtube.com/watch?v=CwHetPzsQBY
+
+After finish foundation, you can create a VM that content Oracle Linux OS. Install Oracle database follow this link -
+
+https://www.youtube.com/watch?v=CwHetPzsQBY
+
 Create your base image of VM. After you create this VM , you can clone VMs base on it.
 The only thing you need to modify is host name to IP address . Means you need to modify your /etc/hosts point to the right IP address.
 
-If you have any question, you can send a email to albert.chen@nutanix.com. I will happy to teach you how to setup a environment or provide the base VM image to you.  
+If you have any question, you can send a email to albert.chen@nutanix.com. I will happy to teach you how to setup a environment or provide the base VM image to you.
