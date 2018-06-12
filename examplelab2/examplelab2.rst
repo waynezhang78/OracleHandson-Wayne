@@ -333,40 +333,53 @@ export ORACLE_SID=xxxx where the xxxx is Oracle database instance name.
 On the command prompt , type follow command
 
 
-$ sqlplus  / as sysdba
-SQL>alter system set db_file_multiblock_read_count=256  scope=spfile;
-SQL>alter system set parallel_threads_per_CPU=1 scope=spfile;
+``$ sqlplus  / as sysdba``
+
+``SQL>alter system set db_file_multiblock_read_count=256  scope=spfile;``
+
+``SQL>alter system set parallel_threads_per_CPU=1 scope=spfile;``
+
 And then restart the database
 
-SQL>shutdown immediate;
-SQL>startup;
+``SQL>shutdown immediate;``
+
+``SQL>startup;``
 
 .. figure:: images/Lab223.png
 
 Make sure the parameter already changed. Please issue the SQL command
-SQL> show parameter db_file_multi
-SQL> show parameter parallel_thre
+
+``SQL> show parameter db_file_multi``
+
+``SQL> show parameter parallel_thre``
 
 .. figure:: images/Lab224.png
 
 **Adjust SGA size**
 
 First, we need to know Oracle currentSGA size , using this command to check SGA size in Oracle database and check the setting for SGA , in the SQL prompt , issue these command
-SQL> show SGA
-SQL> show parameter sga
+
+``SQL> show SGA``
+
+``SQL> show parameter sga ``
 
 .. figure:: images/Lab225.png
 
 When we need to adjust SGA size. Please setup those two parameters sga_max_size and sga_target . Set those two parameter size to 50-75% of your virtual machine RAM (OLTP) , for OLAP just setup to 30% of virtual machine RAM . For ex: If your virtual machine RAM size is 32GB , then setup Oracle SGA to size 16GB to 24GB for OLTP database. Setup to 9.6GB if your database is OLAP
-How to change SGA size - in the SQL prompt , issue this command
-SQL>alter system set sga_max_size=xxx scope=spfile;
-SQL>alter system set sga_target=xxx scope=spfile;
-SQL>alter system set memory_target=0 scope=spfile;
+How to change SGA size - in the SQL prompt , type these command :
+
+``SQL>alter system set sga_max_size=xxx scope=spfile;``
+
+``SQL>alter system set sga_target=xxx scope=spfile;``
+
+``SQL>alter system set memory_target=0 scope=spfile;``
+
 Where xxx is size of your SGA, ex sga_max_size=16G
 
 .. figure:: images/Lab226.png
 
 **Setup PGA size**
+
 The method same to set Oracle SGA size , in PGA you just need to setup one parameter. pga_aggregate_target. PGA starting point for OLTP is 15%, for OLAP is 50%. Ex: if your virtual machine is 32 GB RAM, you can setup this value for PGA is 4.8GB, for OLAP you can set to 16 GB. As following example setup PGA size .After setup PGA size, you need  restart database
 .. figure:: images/Lab226.png
 
@@ -386,3 +399,5 @@ Some Rules like :
 -	Disable Shadow Clone
 
 More information just follow Michael Webster’s Oracle on Nutanix Best Practice Guide “BP-2000_Oracle_on_Nutanix_Best_Practices.pdf”.
+
+https://www.nutanix.com/go/optimizing-oracle-on-ahv.html
