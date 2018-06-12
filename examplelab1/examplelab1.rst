@@ -12,7 +12,7 @@ Swingbench is a 3rd party tools for testing Oracle database performance . It can
 Why we use this tool for the partner training , because the configuration of this tool are vary easy for someone who even no any Oracle experience
 There are two job when we using Swingbench testing OLTP performance. First job, you need to create Schema (collection of testing tables and indexes ) .
 Create the schema
-Go to **/home/oracle/swingbemch/bin** , execute the ** ./oewizard ** to build your schema.
+Go to **/home/oracle/swingbemch/bin** , execute the **./oewizard ** to build your schema.
 
 .. figure:: images/createschema.png
 
@@ -24,7 +24,7 @@ Choose Version 2.0 and click **“Next”**
 
 .. figure:: images/OE2.png
 
-select the **“Create the Order Entry Schema “** and click **“Next”**
+select the **“Create the Order Entry Schema“** and click **“Next”**
 
 .. figure:: images/OE3.png
 
@@ -32,7 +32,7 @@ Change the connect String to **//Hostname/SID** (Depends on your Oracle environm
 
 .. figure:: images/OE4.png
 
-Leave all column default , just in the “Tablespace’s Datafile” input **“+DATA”** (Your ASM disk group name) as below show, Click **“Next”**
+Leave all column default , just in the **“Tablespace’s Datafile”** input **“+DATA”** (Your ASM disk group name) as below show, Click **“Next”**
 
 .. figure:: images/OE5.png
 
@@ -59,15 +59,15 @@ Then you should see the **“Schema Created“** screen, the invalid should be *
 Running Swingbench testing
 ++++++++++++++++++++++++++
 
-Go to **/home/oracle/swingbemch/bin** , execute the ** ./swingbench ** to run OLTP testing
+Go to **/home/oracle/swingbemch/bin** , execute the **./swingbench ** to run OLTP testing
 
 .. figure:: images/SW1.png
 
-change the **“Connect String “** to /Linux666/orcl, Linux666 is hostname , orcl is instance name of Oracle (Adjust by your own environment)
+change the **“Connect String“** to /Linux666/orcl, Linux666 is hostname , orcl is instance name of Oracle (Adjust by your own environment)
 
 .. figure:: images/SW2.png
 
-The click the connection test button “the blue earth”, testing swingbench client can be successful connect to Database
+The click the connection test button **“the blue earth”**, testing swingbench client can be successful connect to Database
 
 .. figure:: images/SW3.png
 
@@ -75,7 +75,7 @@ change the Number of user to 350 , Benchmark Run Tim to 10 minutes and Record St
 
 .. figure:: images/SW4.png
 
-Click the “Distributed Controls” tab, and type the Hostname to Linux666 , username use root , and Password is qaz12345. After input , please try “Test Connection”
+Click the **“Distributed Controls”** tab, and type the Hostname to Linux666 , username use root , and Password is qaz12345. After input , please try **“Test Connection”**
 
 
 .. figure:: images/SW5.png
@@ -83,7 +83,7 @@ Click the “Distributed Controls” tab, and type the Hostname to Linux666 , us
 
 .. figure:: images/SW6.png
 
-After all set , please click the “Play” the green button.
+After all set , please click the **“Play”** the green button.
 
 .. figure:: images/SW7.png
 
