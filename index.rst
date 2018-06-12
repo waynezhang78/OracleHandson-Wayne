@@ -9,13 +9,6 @@
   examplelab1/examplelab1
   examplelab2/examplelab2
 
-.. toctree::
-  :maxdepth: 2
-  :caption: Optional Labs
-  :name: _optional_labs
-  :hidden:
-
-  examplelab3/examplelab3
 
 .. toctree::
   :maxdepth: 2
@@ -24,7 +17,6 @@
   :hidden:
 
   appendix/glossary
-  appendix/otherstuff
 
 .. _getting_started:
 
@@ -32,7 +24,7 @@
 Getting Started
 ---------------
 
-This Guide is for quick apply Oracle best practice step by step base on Michael Webster’s best practice. 
+This Guide is for quick apply Oracle best practice step by step base on Michael Webster’s best practice.
 In filed , I found most of people read the best practice guide but still can’t apply those parameter or settings.
 So I wrote this guide for who do not have any Oracle technical background .
 It’s a quick way to apply those best practice. I still suggest you must read our Nutanix best guide to understand why we tune this.

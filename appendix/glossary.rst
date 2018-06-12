@@ -2,17 +2,21 @@
 Glossary
 -------------
 
-Term
-++++
+Nutanix Reference Documents
++++++++++++++++++++++++++++
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies erat eget ultrices mollis. Aliquam convallis, magna quis bibendum consequat, eros metus ornare turpis, eu fermentum orci ante sit amet elit. Morbi tincidunt sit amet urna ac commodo. Vestibulum eu egestas neque. Quisque interdum ante tincidunt felis tempus, in varius dolor cursus. Nam maximus efficitur magna non rutrum. Curabitur felis sapien, accumsan vel condimentum dignissim, faucibus in metus. Aenean molestie eros nec urna consequat sagittis. Pellentesque eu tempus urna. Cras eget consequat metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce mollis purus id purus sodales scelerisque.
+Download Oracle Database Solution Brief
 
-Another Term
-++++++++++++
+https://www.nutanix.com/solutions/enterprise-applications/oracle-db/
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies erat eget ultrices mollis. Aliquam convallis, magna quis bibendum consequat, eros metus ornare turpis, eu fermentum orci ante sit amet elit. Morbi tincidunt sit amet urna ac commodo. Vestibulum eu egestas neque. Quisque interdum ante tincidunt felis tempus, in varius dolor cursus. Nam maximus efficitur magna non rutrum. Curabitur felis sapien, accumsan vel condimentum dignissim, faucibus in metus. Aenean molestie eros nec urna consequat sagittis. Pellentesque eu tempus urna. Cras eget consequat metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce mollis purus id purus sodales scelerisque.
+Oracle on AHV Best Practice guide
 
-Yet Another Term
-++++++++++++++++
+https://www.nutanix.com/go/optimizing-oracle-on-ahv.html
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies erat eget ultrices mollis. Aliquam convallis, magna quis bibendum consequat, eros metus ornare turpis, eu fermentum orci ante sit amet elit. Morbi tincidunt sit amet urna ac commodo. Vestibulum eu egestas neque. Quisque interdum ante tincidunt felis tempus, in varius dolor cursus. Nam maximus efficitur magna non rutrum. Curabitur felis sapien, accumsan vel condimentum dignissim, faucibus in metus. Aenean molestie eros nec urna consequat sagittis. Pellentesque eu tempus urna. Cras eget consequat metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce mollis purus id purus sodales scelerisque.
+Database Love Nutanix
+
+https://www.slideshare.net/NEXTtour/databases-love-nutanix
+
+.NEXT 2016 Solutions Demo MCS/AHV, SQL Server/AHV, ABS/Oracle RAC
+
+https://www.youtube.com/watch?v=-UzbtBARKL0

@@ -5,7 +5,7 @@
 Lab 2: Oracle on Nutanix Best Practice
 -------------
 
-2.1: Before installation Oracle database
+2.1 Before installation Oracle database
 ++++++++++++++++++++++++++++++++++++++++
 
 Please ask your user to download the oracle preinstall package – This will help you to check whole oracle environment and installed required package for you . Create Oracle account for you . But you need to change Oracle password by yourself .
@@ -14,12 +14,12 @@ When you start install Oracle database , please go Oracle website download “or
 
 ``yum install oracle-rdbms-server-11gR2-preinstall``
 
-2.2: Grid or Not Grid
+2.2 Grid or Not Grid
 +++++++++++++++++++++
 
 Grid is for Oracle ASM and Oracle RAC installation . If your customer they using OS file systems. You do not need to install grid on the machine. ( Usually Oracle partner will know this , in case sometimes user want install by themselves) just remind .
 
-2.3: ESXi VMDK / PVSCSI Design (No need for AHV)
+2.3 ESXi VMDK / PVSCSI Design (No need for AHV)
 ++++++++++++++++++++++++++++++++++++++++++++++++
 
 This just apply to ESXi hypervisor only , we don’t use this design on Acropolis AHV. When using Oracle database on Nutanix . We need create multiple disks (VMDK) for redo , archive log , datafiles , minimum start from two disks for each function and also located in the different PVSCSI card. Here are step to setup VMDK in different PVSCSI cards.
@@ -82,7 +82,7 @@ In the Add Disk just need to type the size of the vDisk. Then click **Add**
 
 .. figure:: images/Lab209.png
 
-2.4: Choose LVM or ASM
+2.4 Choose LVM or ASM
 ++++++++++++++++++++++
 **2.4.1 Using ASM -  (In this lab , we recommend use this )**
 
@@ -92,7 +92,7 @@ First – we need to install some required package from Oracle website . Go this
 
 http://www.oracle.com/technetwork/server-storage/linux/downloads/rhel5-084877.html
 
-.. note:: Required package Oracle asm library , **oracleasm-support**, **oracleasm** ,**oracleasmlib**
+.. note:: Required package Oracle asm library , **oracleasm-support,oracleasm,oracleasmlib**
 
 
 
