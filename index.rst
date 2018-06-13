@@ -1,4 +1,4 @@
-.. title:: Oracle on Nutanix Training
+.. title:: Oracle on Nutanix 培训
 
 .. toctree::
   :maxdepth: 2
@@ -30,7 +30,7 @@
 .. _getting_started:
 
 ---------------
-Getting Started
+开始
 ---------------
 
 This workshop is for quick apply Oracle best practice step by step base on Nutanix Oralce on AHV best practice for SE or partner training.
@@ -48,7 +48,7 @@ https://docs.oracle.com/database/121/LADBI/toc.htm
 http://www.snapdba.com/2014/01/oracle-database-11gr2-11-2-0-4-installation-on-oracle-linux-6-4/
 
 ---------------
-Lab Environment
+实验环境
 ---------------
 
 -Hardware:
