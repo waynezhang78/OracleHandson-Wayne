@@ -1,4 +1,13 @@
-.. title:: Introduction to Nutanix AHV
+.. title:: Oracle on Nutanix Training
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Deck
+  :name: _Deck
+  :hidden:
+
+  OracleDeck/aaa
+
 
 .. toctree::
   :maxdepth: 2
